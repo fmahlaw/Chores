@@ -1,0 +1,23 @@
+{
+  "name": "chores",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmahlaw/Chores.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fmahlaw/Chores/issues"
+  },
+  "homepage": "https://github.com/fmahlaw/Chores#readme",
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}

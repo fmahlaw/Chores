@@ -1,0 +1,57 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+  }
+  
+  #app {
+    padding: 20px;
+  }
+  
+  h1 {
+    margin-top: 0;
+  }
+  
+  h2 {
+    margin-top: 20px;
+  }
+  
+  #chore-list {
+    margin-bottom: 40px;
+  }
+  
+  #chore-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #chore-list li {
+    margin-bottom: 10px;
+  }
+  
+  #add-chore input[type="text"] {
+    width: 200px;
+  }
+  
+  #add-chore button {
+    margin-left: 10px;
+  }
+  
+  #user-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #user-list li {
+    margin-bottom: 10px;
+  }
+  
+  #add-user input[type="text"] {
+    width: 200px;
+  }
+  
+  #add-user button {
+    margin-left: 10px;
+  }
+  

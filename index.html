@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chores App</title>
+  </head>
+  <body>
+    <h1>Chores App</h1>
+    <h2>Users</h2>
+    <ul id="users"></ul>
+    <h2>Chores</h2>
+    <ul id="chores"></ul>
+    <h2>Unassigned Chores</
+        <ul id="unassigned-chores"></ul>
+        <h2>Assign Chores</h2>
+        <form id="assign-form">
+          <label for="user">User:</label>
+          <select id="user" name="user"></select>
+          <label for="chore">Chore:</label>
+          <select id="chore" name="chore"></select>
+          <button type="submit">Assign</button>
+        </form>
+        <h2>Assigned Chores</h2>
+        <ul id="assigned-chores"></ul>
+    
+        <script src="app.js"></script>
+        <script>
+          const app = new ChoresApp();
+          const usersList = document.getElementById("users");
+          const choresList = document.getElementById("chores");
+          const unassignedChoresList = document.getElementById("unassigned-chores");
+          const assignedChoresList = document.getElementById("assigned-chores");
+          const userSelect = document.getElementById("user");
+          const choreSelect = document.getElementById("chore");
+          const assignForm = document.getElementById("assign-form");
+    
+          // Update the list of users
+          function updateUsersList() {
+            usersList.innerHTML = "";
+            app.getUsers().forEach((user) => {
+              const li = document.createElement("li");
+              li.textContent = user.name;
+              usersList.appendChild(li);
+            });
+          }
+    
+          // Update the list of chores
+          function updateChoresList() {
+            choresList.innerHTML = "";
+            app.getChores().forEach((chore) => {
+              const li = document.createElement("li");
+              li.textContent = chore.name;
+              choresList.appendChild(li);
+            });
+          }
+    
+          // Update the list of unassigned chores
+          function updateUnassignedChoresList() {
+            unassignedChoresList.innerHTML = "";
+            app.getUnassignedChores().forEach((chore) => {
+              const li = document.createElement("li");
+              li.textContent = chore.name;
+              unassignedChoresList.appendChild(li);
+            });
+          }
+    
+          // Update the list of assigned chores for the selected user
+          function updateAssignedChoresList(user) {
+            assignedChoresList.innerHTML = "";
+            app.getAssignedChores(user).forEach((chore) => {
+              const li = document.createElement("li");
+              li.textContent = `${chore.name} (assigned to ${chore.getAssignedUserName()})`;
+              assignedChoresList.appendChild(li);
+            });
+          }
+    
+          // Update the user select dropdown
+          function updateUserSelect() {
+            userSelect.innerHTML = "";
+            app.getUsers().forEach((user) => {
+              const option = document.createElement("option");
+              option.value = user.name;
+              option.textContent = user.name;
+              userSelect.appendChild(option);
+            });
+          }
+    
+          // Update the chore select dropdown
+          function updateChoreSelect() {
+            choreSelect.innerHTML = "";
+            app.getUnassignedChores().forEach((chore) => {
+              const option = document.createElement("option");
+              option.value = chore.name;
+              option.textContent = chore.name;
+              choreSelect.appendChild(option);
+            });
+          }
+    
+          // Handle the form submission to assign a chore
+          assignForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const userName = userSelect.value;
+            const choreName = choreSelect.value;
+            const user = app.getUsers().find((user) => user.name === userName);
+            const chore = app.getChores().find((chore) => chore.name === choreName);
+            if (user && chore) {
+              app.assignChore(user, chore);
+              updateUnassignedChoresList();
+             
+              updateAssignedChoresList(user);
+        }
+      });
+
+      // Initialize the app and update the UI
+      app.addUser("Alice");
+      app.addUser("Bob");
+      app.addChore("Wash dishes");
+      app.addChore("Take out the trash");
+      app.addChore("Do laundry");
+      updateUsersList();
+      updateChoresList();
+      updateUnassignedChoresList();
+      updateUserSelect();
+      updateChoreSelect();
+      // Handle user selection
+      userSelect.addEventListener("change", (event) => {
+        const userName = event.target.value;
+        const user = app.getUsers().find((user) => user.name === userName);
+        if (user) {
+          updateAssignedChoresList(user);
+        }
+      });
+    </script>
+  </body>
+</html>
+    
